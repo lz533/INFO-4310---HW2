@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+  <style>
+    .gridlines line {
+      stroke: #bbb;
+    }
+
+    .gridlines .domain {
+      stroke: none;
+    }
+
+    .neighborhood {
+      fill: #eee;
+      stroke: #fff;
+      stroke-width: 2;
+    }
+
+    .mini {
+      fill: #eee;
+      stroke: #fff;
+      stroke-width: 1;
+    }
+  </style>
+  <title>INFO 4310 HW2</title>
+</head>
+
+
+<body>
+  <h1>Title here</h1>
+
+
+  <div>
+    <svg id="main" height=900 width=1080 style="border:1px solid black;margin-bottom: 0;">
+    </svg>
+    <script>
+
+      // set up main vis
+      const main = d3.select("#main")
+      const mainMargin = { t: 60, r: 200, b: 20, l: 20 }
+      const mainWidth = main.attr("width") - mainMargin.l - mainMargin.r
+      const mainHeight = main.attr("height") - mainMargin.t - mainMargin.b
+      const viewport = main.append("g")
+        .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`)
+
+      // render data
+      let render = async function () {
+        let df = await d3.csv('./')
+        let map = await d3.json("./")
+        console.log(df)
+        console.log(map)
+      }
+      render()
+
+
+
+
+
+    </script>
+  </div>
+
+</body>
+
+</html>
