@@ -1,0 +1,52 @@
+dt,AverageTemperature,AverageTemperatureUncertainty,State,Country
+2000/1/1,8.274,0.092,Alabama,United States
+2000/1/1,-20.109,0.439,Alaska,United States
+2000/1/1,7.305,0.195,Arizona,United States
+2000/1/1,5.568,0.191,Arkansas,United States
+2000/1/1,7.667,0.226,California,United States
+2000/1/1,-2.088,0.144,Colorado,United States
+2000/1/1,-3.029,0.246,Connecticut,United States
+2000/1/1,0.345,0.304,Delaware,United States
+2000/1/1,-0.097,0.214,District Of Columbia,United States
+2000/1/1,15.41,0.076,Florida,United States
+2000/1/1,8.365,0.162,Georgia (State),United States
+2000/1/1,20.747,0.371,Hawaii,United States
+2000/1/1,-4.392,0.226,Idaho,United States
+2000/1/1,-2.35,0.069,Illinois,United States
+2000/1/1,-2.633,0.205,Indiana,United States
+2000/1/1,-5.23,0.184,Iowa,United States
+2000/1/1,0.845,0.151,Kansas,United States
+2000/1/1,0.983,0.143,Kentucky,United States
+2000/1/1,11.64,0.172,Louisiana,United States
+2000/1/1,-9.574,0.326,Maine,United States
+2000/1/1,0.538,0.218,Maryland,United States
+2000/1/1,-5.273,0.171,Massachusetts,United States
+2000/1/1,-6.478,0.242,Michigan,United States
+2000/1/1,-11.688,0.216,Minnesota,United States
+2000/1/1,8.955,0.127,Mississippi,United States
+2000/1/1,0.568,0.133,Missouri,United States
+2000/1/1,-5.741,0.266,Montana,United States
+2000/1/1,-2.024,0.144,Nebraska,United States
+2000/1/1,1.347,0.27,Nevada,United States
+2000/1/1,-8.541,0.302,New Hampshire,United States
+2000/1/1,-1.54,0.255,New Jersey,United States
+2000/1/1,3.702,0.171,New Mexico,United States
+2000/1/1,-6.549,0.207,New York,United States
+2000/1/1,4.152,0.206,North Carolina,United States
+2000/1/1,-10.753,0.199,North Dakota,United States
+2000/1/1,-2.96,0.184,Ohio,United States
+2000/1/1,4.861,0.129,Oklahoma,United States
+2000/1/1,0.236,0.202,Oregon,United States
+2000/1/1,-3.313,0.24,Pennsylvania,United States
+2000/1/1,-2.996,0.235,Rhode Island,United States
+2000/1/1,6.97,0.193,South Carolina,United States
+2000/1/1,-5.902,0.179,South Dakota,United States
+2000/1/1,3.313,0.126,Tennessee,United States
+2000/1/1,10.241,0.13,Texas,United States
+2000/1/1,-0.685,0.18,Utah,United States
+2000/1/1,-8.898,0.334,Vermont,United States
+2000/1/1,1.458,0.234,Virginia,United States
+2000/1/1,-1.165,0.22,Washington,United States
+2000/1/1,-0.968,0.215,West Virginia,United States
+2000/1/1,-8.945,0.205,Wisconsin,United States
+2000/1/1,-4.29,0.317,Wyoming,United States

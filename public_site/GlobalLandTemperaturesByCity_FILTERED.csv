@@ -1,0 +1,258 @@
+dt,AverageTemperature,AverageTemperatureUncertainty,City,Country,Latitude,Longitude
+2000/1/1,8.039,0.18,Abilene,United States,32.95N,100.53W
+2000/1/1,-2.859,0.188,Akron,United States,40.99N,80.95W
+2000/1/1,2.389,0.22,Albuquerque,United States,34.56N,107.03W
+2000/1/1,-0.097,0.214,Alexandria,United States,39.38N,76.99W
+2000/1/1,-3.168,0.238,Allentown,United States,40.99N,74.56W
+2000/1/1,5.86,0.191,Amarillo,United States,34.56N,101.19W
+2000/1/1,14.921,0.349,Anaheim,United States,32.95N,117.77W
+2000/1/1,-15.38,0.986,Anchorage,United States,61.88N,151.13W
+2000/1/1,-4.653,0.226,Ann Arbor,United States,42.59N,82.91W
+2000/1/1,10.081,0.228,Antioch,United States,37.78N,122.03W
+2000/1/1,9.084,0.138,Arlington,United States,32.95N,96.70W
+2000/1/1,-0.097,0.214,Arlington,United States,39.38N,76.99W
+2000/1/1,-5.436,0.343,Arvada,United States,39.38N,106.13W
+2000/1/1,4.813,0.261,Atlanta,United States,34.56N,83.68W
+2000/1/1,-0.081,0.274,Aurora,United States,39.38N,104.05W
+2000/1/1,-4.118,0.324,Aurora,United States,40.99N,87.34W
+2000/1/1,12.973,0.213,Austin,United States,29.74N,97.85W
+2000/1/1,8.865,0.537,Bakersfield,United States,36.17N,119.34W
+2000/1/1,-0.097,0.214,Baltimore,United States,39.38N,76.99W
+2000/1/1,13.517,0.217,Baton Rouge,United States,29.74N,90.46W
+2000/1/1,13.585,0.278,Beaumont,United States,29.74N,94.15W
+2000/1/1,0.776,0.266,Bellevue,United States,47.42N,121.97W
+2000/1/1,10.081,0.228,Berkeley,United States,37.78N,122.03W
+2000/1/1,8.227,0.248,Birmingham,United States,32.95N,87.13W
+2000/1/1,-6.166,0.178,Boston,United States,42.59N,72.00W
+2000/1/1,-1.108,0.344,Bridgeport,United States,40.99N,72.43W
+2000/1/1,19.859,0.32,Brownsville,United States,26.52N,96.72W
+2000/1/1,-5.201,0.329,Buffalo,United States,42.59N,78.55W
+2000/1/1,10.772,0.455,Burbank,United States,34.56N,118.70W
+2000/1/1,-6.166,0.178,Cambridge,United States,42.59N,72.00W
+2000/1/1,18.927,0.2,Cape Coral,United States,26.52N,82.39W
+2000/1/1,9.084,0.138,Carrollton,United States,32.95N,96.70W
+2000/1/1,3.299,0.334,Cary,United States,36.17N,79.56W
+2000/1/1,-6.726,0.193,Cedar Rapids,United States,42.59N,91.64W
+2000/1/1,12.779,0.223,Chandler,United States,32.95N,112.02W
+2000/1/1,9.699,0.338,Charleston,United States,32.95N,79.47W
+2000/1/1,5.483,0.26,Charlotte,United States,34.56N,81.73W
+2000/1/1,4.952,0.235,Chattanooga,United States,34.56N,85.62W
+2000/1/1,6.189,0.272,Chesapeake,United States,36.17N,75.58W
+2000/1/1,0.137,0.595,Chicago,United States,42.59N,87.27W
+2000/1/1,14.921,0.349,Chula Vista,United States,32.95N,117.77W
+2000/1/1,-2.292,0.323,Cincinnati,United States,39.38N,85.32W
+2000/1/1,3.375,0.244,Clarksville,United States,36.17N,87.51W
+2000/1/1,16.251,0.142,Clearwater,United States,28.13N,82.73W
+2000/1/1,-2.859,0.188,Cleveland,United States,40.99N,80.95W
+2000/1/1,-0.081,0.274,Colorado Springs,United States,39.38N,104.05W
+2000/1/1,5.483,0.26,Columbia,United States,34.56N,81.73W
+2000/1/1,7.675,0.206,Columbus,United States,32.95N,85.21W
+2000/1/1,-2.167,0.291,Columbus,United States,39.38N,83.24W
+2000/1/1,10.081,0.228,Concord,United States,37.78N,122.03W
+2000/1/1,17.852,0.188,Coral Springs,United States,26.52N,80.60W
+2000/1/1,14.921,0.349,Corona,United States,32.95N,117.77W
+2000/1/1,16.093,0.298,Corpus Christi,United States,28.13N,97.27W
+2000/1/1,14.921,0.349,Costa Mesa,United States,32.95N,117.77W
+2000/1/1,9.084,0.138,Dallas,United States,32.95N,96.70W
+2000/1/1,-2.167,0.291,Dayton,United States,39.38N,83.24W
+2000/1/1,9.084,0.138,Denton,United States,32.95N,96.70W
+2000/1/1,-0.081,0.274,Denver,United States,39.38N,104.05W
+2000/1/1,-2.773,0.257,Des Moines,United States,40.99N,93.73W
+2000/1/1,-4.653,0.226,Detroit,United States,42.59N,82.91W
+2000/1/1,10.772,0.455,Downey,United States,34.56N,118.70W
+2000/1/1,3.299,0.334,Durham,United States,36.17N,79.56W
+2000/1/1,10.772,0.455,East Los Angeles,United States,34.56N,118.70W
+2000/1/1,-3.168,0.238,Edison,United States,40.99N,74.56W
+2000/1/1,10.772,0.455,El Monte,United States,34.56N,118.70W
+2000/1/1,7.782,0.497,El Paso,United States,31.35N,105.55W
+2000/1/1,-3.168,0.238,Elizabeth,United States,40.99N,74.56W
+2000/1/1,14.921,0.349,Escondido,United States,32.95N,117.77W
+2000/1/1,3.179,0.207,Eugene,United States,44.20N,122.98W
+2000/1/1,1.457,0.189,Evansville,United States,37.78N,87.46W
+2000/1/1,10.081,0.228,Fairfield,United States,37.78N,122.03W
+2000/1/1,5.568,0.242,Fayetteville,United States,34.56N,79.78W
+2000/1/1,-4.653,0.226,Flint,United States,42.59N,82.91W
+2000/1/1,10.146,0.207,Fontana,United States,34.56N,116.76W
+2000/1/1,-0.4,0.265,Fort Collins,United States,40.99N,104.38W
+2000/1/1,17.852,0.188,Fort Lauderdale,United States,26.52N,80.60W
+2000/1/1,-4.308,0.381,Fort Wayne,United States,40.99N,85.21W
+2000/1/1,9.084,0.138,Fort Worth,United States,32.95N,96.70W
+2000/1/1,10.081,0.228,Fremont,United States,37.78N,122.03W
+2000/1/1,8.865,0.537,Fresno,United States,36.17N,119.34W
+2000/1/1,14.921,0.349,Fullerton,United States,32.95N,117.77W
+2000/1/1,12.565,0.134,Gainesville,United States,29.74N,83.08W
+2000/1/1,14.921,0.349,Garden Grove,United States,32.95N,117.77W
+2000/1/1,9.084,0.138,Garland,United States,32.95N,96.70W
+2000/1/1,12.779,0.223,Gilbert,United States,32.95N,112.02W
+2000/1/1,12.779,0.223,Glendale,United States,32.95N,112.02W
+2000/1/1,10.772,0.455,Glendale,United States,34.56N,118.70W
+2000/1/1,9.084,0.138,Grand Prairie,United States,32.95N,96.70W
+2000/1/1,-4.765,0.438,Grand Rapids,United States,42.59N,85.09W
+2000/1/1,-4.908,0.313,Green Bay,United States,44.20N,87.20W
+2000/1/1,3.299,0.334,Greensboro,United States,36.17N,79.56W
+2000/1/1,6.189,0.272,Hampton,United States,36.17N,75.58W
+2000/1/1,-1.108,0.344,Hartford,United States,40.99N,72.43W
+2000/1/1,10.081,0.228,Hayward,United States,37.78N,122.03W
+2000/1/1,8.547,0.269,Henderson,United States,36.17N,115.36W
+2000/1/1,17.852,0.188,Hialeah,United States,26.52N,80.60W
+2000/1/1,-0.081,0.274,Highlands Ranch,United States,39.38N,104.05W
+2000/1/1,17.852,0.188,Hollywood,United States,26.52N,80.60W
+2000/1/1,13.859,0.309,Houston,United States,29.74N,96.00W
+2000/1/1,14.921,0.349,Huntington Beach,United States,32.95N,117.77W
+2000/1/1,4.952,0.235,Huntsville,United States,34.56N,85.62W
+2000/1/1,-0.231,0.236,Independence,United States,39.38N,93.64W
+2000/1/1,-2.292,0.323,Indianapolis,United States,39.38N,85.32W
+2000/1/1,10.772,0.455,Inglewood,United States,34.56N,118.70W
+2000/1/1,14.921,0.349,Irvine,United States,32.95N,117.77W
+2000/1/1,9.084,0.138,Irving,United States,32.95N,96.70W
+2000/1/1,8.577,0.184,Jackson,United States,32.95N,90.96W
+2000/1/1,14.961,0.294,Jacksonville,United States,29.74N,81.23W
+2000/1/1,-3.168,0.238,Jersey City,United States,40.99N,74.56W
+2000/1/1,-4.118,0.324,Joliet,United States,40.99N,87.34W
+2000/1/1,-0.231,0.236,Kansas City,United States,39.38N,93.64W
+2000/1/1,10.51,0.294,Killeen,United States,31.35N,98.01W
+2000/1/1,2.017,0.264,Knoxville,United States,36.17N,83.54W
+2000/1/1,13.553,0.306,Lafayette,United States,29.74N,92.31W
+2000/1/1,-0.081,0.274,Lakewood,United States,39.38N,104.05W
+2000/1/1,10.772,0.455,Lancaster,United States,34.56N,118.70W
+2000/1/1,-4.765,0.438,Lansing,United States,42.59N,85.09W
+2000/1/1,15.39,0.302,Laredo,United States,28.13N,99.09W
+2000/1/1,8.547,0.269,Las Vegas,United States,36.17N,115.36W
+2000/1/1,1.047,0.19,Lexington Fayette,United States,37.78N,85.42W
+2000/1/1,-2.13,0.136,Lincoln,United States,40.99N,95.86W
+2000/1/1,6.068,0.27,Little Rock,United States,34.56N,91.46W
+2000/1/1,14.921,0.349,Long Beach,United States,32.95N,117.77W
+2000/1/1,10.772,0.455,Los Angeles,United States,34.56N,118.70W
+2000/1/1,1.047,0.19,Louisville,United States,37.78N,85.42W
+2000/1/1,-6.166,0.178,Lowell,United States,42.59N,72.00W
+2000/1/1,7.15,0.125,Lubbock,United States,32.95N,102.45W
+2000/1/1,-6.275,0.311,Madison,United States,42.59N,89.45W
+2000/1/1,-6.166,0.178,Manchester,United States,42.59N,72.00W
+2000/1/1,6.005,0.145,Memphis,United States,34.56N,89.51W
+2000/1/1,12.779,0.223,Mesa,United States,32.95N,112.02W
+2000/1/1,9.084,0.138,Mesquite,United States,32.95N,96.70W
+2000/1/1,13.517,0.217,Metairie,United States,29.74N,90.46W
+2000/1/1,17.852,0.188,Miami,United States,26.52N,80.60W
+2000/1/1,0.137,0.595,Milwaukee,United States,42.59N,87.27W
+2000/1/1,-11.14,0.342,Minneapolis,United States,45.81N,93.46W
+2000/1/1,17.852,0.188,Miramar,United States,26.52N,80.60W
+2000/1/1,10.869,0.166,Mobile,United States,31.35N,88.59W
+2000/1/1,5.58,0.597,Modesto,United States,37.78N,120.00W
+2000/1/1,8.227,0.248,Montgomery,United States,32.95N,87.13W
+2000/1/1,10.146,0.207,Moreno Valley,United States,34.56N,116.76W
+2000/1/1,-4.118,0.324,Naperville,United States,40.99N,87.34W
+2000/1/1,3.375,0.244,Nashville,United States,36.17N,87.51W
+2000/1/1,-1.108,0.344,New Haven,United States,40.99N,72.43W
+2000/1/1,13.517,0.217,New Orleans,United States,29.74N,90.46W
+2000/1/1,-3.168,0.238,New York,United States,40.99N,74.56W
+2000/1/1,-3.168,0.238,Newark,United States,40.99N,74.56W
+2000/1/1,2.104,0.272,Newport News,United States,37.78N,77.29W
+2000/1/1,11.281,0.561,Nogales,United States,31.35N,111.20W
+2000/1/1,6.189,0.272,Norfolk,United States,36.17N,75.58W
+2000/1/1,6.565,0.2,Norman,United States,34.56N,97.30W
+2000/1/1,8.547,0.269,North Las Vegas,United States,36.17N,115.36W
+2000/1/1,10.772,0.455,Norwalk,United States,34.56N,118.70W
+2000/1/1,15.39,0.302,Nuevo Laredo,United States,28.13N,99.09W
+2000/1/1,10.081,0.228,Oakland,United States,37.78N,122.03W
+2000/1/1,14.921,0.349,Oceanside,United States,32.95N,117.77W
+2000/1/1,3.857,0.219,Oklahoma City,United States,36.17N,97.46W
+2000/1/1,0.027,0.228,Olathe,United States,39.38N,95.72W
+2000/1/1,-2.13,0.136,Omaha,United States,40.99N,95.86W
+2000/1/1,10.146,0.207,Ontario,United States,34.56N,116.76W
+2000/1/1,14.921,0.349,Orange,United States,32.95N,117.77W
+2000/1/1,16.273,0.161,Orlando,United States,28.13N,80.91W
+2000/1/1,-0.231,0.236,Overland Park,United States,39.38N,93.64W
+2000/1/1,10.772,0.455,Oxnard,United States,34.56N,118.70W
+2000/1/1,10.772,0.455,Palmdale,United States,34.56N,118.70W
+2000/1/1,8.547,0.269,Paradise,United States,36.17N,115.36W
+2000/1/1,13.859,0.309,Pasadena,United States,29.74N,96.00W
+2000/1/1,10.772,0.455,Pasadena,United States,34.56N,118.70W
+2000/1/1,-3.168,0.238,Paterson,United States,40.99N,74.56W
+2000/1/1,17.852,0.188,Pembroke Pines,United States,26.52N,80.60W
+2000/1/1,12.779,0.223,Peoria,United States,32.95N,112.02W
+2000/1/1,-4.031,0.207,Peoria,United States,40.99N,89.47W
+2000/1/1,0.278,0.303,Philadelphia,United States,39.38N,74.91W
+2000/1/1,12.779,0.223,Phoenix,United States,32.95N,112.02W
+2000/1/1,-2.859,0.188,Pittsburgh,United States,40.99N,80.95W
+2000/1/1,9.084,0.138,Plano,United States,32.95N,96.70W
+2000/1/1,10.772,0.455,Pomona,United States,34.56N,118.70W
+2000/1/1,17.852,0.188,Port Saint Lucie,United States,26.52N,80.60W
+2000/1/1,3.914,0.412,Portland,United States,45.81N,123.46W
+2000/1/1,-6.166,0.178,Providence,United States,42.59N,72.00W
+2000/1/1,0.285,0.717,Provo,United States,39.38N,112.37W
+2000/1/1,1.334,0.481,Pueblo,United States,37.78N,103.73W
+2000/1/1,3.299,0.334,Raleigh,United States,36.17N,79.56W
+2000/1/1,10.146,0.207,Rancho Cucamonga,United States,34.56N,116.76W
+2000/1/1,4.279,0.304,Reno,United States,39.38N,120.69W
+2000/1/1,10.146,0.207,Rialto,United States,34.56N,116.76W
+2000/1/1,9.084,0.138,Richardson,United States,32.95N,96.70W
+2000/1/1,10.081,0.228,Richmond,United States,37.78N,122.03W
+2000/1/1,2.104,0.272,Richmond,United States,37.78N,77.29W
+2000/1/1,10.146,0.207,Riverside,United States,34.56N,116.76W
+2000/1/1,-5.201,0.329,Rochester,United States,42.59N,78.55W
+2000/1/1,-6.275,0.311,Rockford,United States,42.59N,89.45W
+2000/1/1,4.279,0.304,Roseville,United States,39.38N,120.69W
+2000/1/1,10.081,0.228,Sacramento,United States,37.78N,122.03W
+2000/1/1,-1.335,0.238,Saint Louis,United States,39.38N,89.48W
+2000/1/1,-11.14,0.342,Saint Paul,United States,45.81N,93.46W
+2000/1/1,16.251,0.142,Saint Petersburg,United States,28.13N,82.73W
+2000/1/1,3.179,0.207,Salem,United States,44.20N,122.98W
+2000/1/1,10.227,0.427,Salinas,United States,36.17N,121.33W
+2000/1/1,1.178,0.625,Salt Lake City,United States,40.99N,112.90W
+2000/1/1,12.973,0.213,San Antonio,United States,29.74N,97.85W
+2000/1/1,10.146,0.207,San Bernardino,United States,34.56N,116.76W
+2000/1/1,14.921,0.349,San Diego,United States,32.95N,117.77W
+2000/1/1,10.081,0.228,San Francisco,United States,37.78N,122.03W
+2000/1/1,10.081,0.228,San Jose,United States,37.78N,122.03W
+2000/1/1,14.921,0.349,Santa Ana,United States,32.95N,117.77W
+2000/1/1,10.081,0.228,Santa Clara,United States,37.78N,122.03W
+2000/1/1,10.772,0.455,Santa Clarita,United States,34.56N,118.70W
+2000/1/1,10.081,0.228,Santa Rosa,United States,37.78N,122.03W
+2000/1/1,11.484,0.336,Savannah,United States,31.35N,81.05W
+2000/1/1,12.779,0.223,Scottsdale,United States,32.95N,112.02W
+2000/1/1,0.776,0.266,Seattle,United States,47.42N,121.97W
+2000/1/1,8.994,0.235,Shreveport,United States,32.95N,92.87W
+2000/1/1,10.772,0.455,Simi Valley,United States,34.56N,118.70W
+2000/1/1,-8.705,0.369,Sioux Falls,United States,44.20N,96.15W
+2000/1/1,-4.308,0.381,South Bend,United States,40.99N,85.21W
+2000/1/1,-1.529,0.292,Spokane,United States,47.42N,117.24W
+2000/1/1,8.547,0.269,Spring Valley,United States,36.17N,115.36W
+2000/1/1,1.642,0.216,Springfield,United States,37.78N,93.56W
+2000/1/1,-1.335,0.238,Springfield,United States,39.38N,89.48W
+2000/1/1,-6.166,0.178,Springfield,United States,42.59N,72.00W
+2000/1/1,-3.168,0.238,Stamford,United States,40.99N,74.56W
+2000/1/1,-4.653,0.226,Sterling Heights,United States,42.59N,82.91W
+2000/1/1,10.081,0.228,Stockton,United States,37.78N,122.03W
+2000/1/1,10.081,0.228,Sunnyvale,United States,37.78N,122.03W
+2000/1/1,8.547,0.269,Sunrise Manor,United States,36.17N,115.36W
+2000/1/1,-5.909,0.474,Syracuse,United States,42.59N,76.36W
+2000/1/1,0.776,0.266,Tacoma,United States,47.42N,121.97W
+2000/1/1,12.91,0.344,Tallahassee,United States,29.74N,84.92W
+2000/1/1,16.251,0.142,Tampa,United States,28.13N,82.73W
+2000/1/1,12.779,0.223,Tempe,United States,32.95N,112.02W
+2000/1/1,-0.081,0.274,Thornton,United States,39.38N,104.05W
+2000/1/1,10.772,0.455,Thousand Oaks,United States,34.56N,118.70W
+2000/1/1,-4.221,0.177,Toledo,United States,40.99N,83.08W
+2000/1/1,0.278,0.303,Toms River,United States,39.38N,74.91W
+2000/1/1,0.027,0.228,Topeka,United States,39.38N,95.72W
+2000/1/1,10.772,0.455,Torrance,United States,34.56N,118.70W
+2000/1/1,11.281,0.561,Tucson,United States,31.35N,111.20W
+2000/1/1,4.46,0.189,Tulsa,United States,36.17N,95.47W
+2000/1/1,10.081,0.228,Vallejo,United States,37.78N,122.03W
+2000/1/1,3.914,0.412,Vancouver,United States,45.81N,123.46W
+2000/1/1,6.189,0.272,Virginia Beach,United States,36.17N,75.58W
+2000/1/1,8.865,0.537,Visalia,United States,36.17N,119.34W
+2000/1/1,10.51,0.294,Waco,United States,31.35N,98.01W
+2000/1/1,-4.653,0.226,Warren,United States,42.59N,82.91W
+2000/1/1,-0.097,0.214,Washington,United States,39.38N,76.99W
+2000/1/1,-1.108,0.344,Waterbury,United States,40.99N,72.43W
+2000/1/1,10.772,0.455,West Covina,United States,34.56N,118.70W
+2000/1/1,1.178,0.625,West Jordan,United States,40.99N,112.90W
+2000/1/1,1.178,0.625,West Valley City,United States,40.99N,112.90W
+2000/1/1,-0.081,0.274,Westminster,United States,39.38N,104.05W
+2000/1/1,1.283,0.198,Wichita,United States,37.78N,97.63W
+2000/1/1,6.05,0.234,Wichita Falls,United States,34.56N,99.24W
+2000/1/1,-4.653,0.226,Windsor,United States,42.59N,82.91W
+2000/1/1,3.299,0.334,Winston Salem,United States,36.17N,79.56W
+2000/1/1,-6.166,0.178,Worcester,United States,42.59N,72.00W
+2000/1/1,-3.168,0.238,Yonkers,United States,40.99N,74.56W
