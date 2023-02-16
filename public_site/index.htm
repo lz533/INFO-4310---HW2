@@ -5,8 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css?family=Aldrich|Arima+Madurai|Open Sans|Libre+Baskerville|Pirata+One|Poiret+One|Sancreek|Satisfy|Share+Tech+Mono|Smokum|Snowburst+One|Special+Elite"
+    rel="stylesheet">
 
   <style>
+    .state{
+      fill: lightgrey;
+      cursor: pointer;
+    }
+    
+    .outline{
+      fill: none;
+      stroke: black;
+      stroke-width: 1px
+    }
+
     .gridlines line {
       stroke: #bbb;
     }
@@ -14,56 +28,118 @@
     .gridlines .domain {
       stroke: none;
     }
-
-    .neighborhood {
-      fill: #eee;
-      stroke: #fff;
-      stroke-width: 2;
-    }
-
-    .mini {
-      fill: #eee;
-      stroke: #fff;
-      stroke-width: 1;
-    }
   </style>
-  <title>INFO 4310 HW2</title>
 </head>
 
-
 <body>
-  <h1>Title here</h1>
-
-
-  <div>
-    <svg id="main" height=900 width=1080 style="border:1px solid black;margin-bottom: 0;">
-    </svg>
-    <script>
-
-      // set up main vis
-      const main = d3.select("#main")
-      const mainMargin = { t: 60, r: 200, b: 20, l: 20 }
-      const mainWidth = main.attr("width") - mainMargin.l - mainMargin.r
-      const mainHeight = main.attr("height") - mainMargin.t - mainMargin.b
-      const viewport = main.append("g")
-        .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`)
-
-      // render data
-      let render = async function () {
-        let df = await d3.csv('./')
-        let map = await d3.json("./")
-        console.log(df)
-        console.log(map)
-      }
-      render()
-
-
-
-
-
-    </script>
+  <h2 style="text-align: center;">INFO 4310 Homework 2: Interactive Visualization Design</h2>
+  <h4 style="text-align: center;">Eric Freitag, Longyi Zhang, Christopher Sun, Miles Rosenthal </h4>
+  <div style="text-align: center;">
+    <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
   </div>
-
 </body>
+
+<script>
+
+  // Set up main visualization and side panel
+  const main = d3.select("#main")
+  const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
+  const mainWidth = main.attr("width") - mainMargin.l - mainMargin.r
+  const mainHeight = main.attr("height") - mainMargin.t - mainMargin.b
+  const map = main.append("g")
+    .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`);
+  const panel = main.append("g")
+    .attr("transform", `translate(${mainMargin.l+mainWidth},${mainMargin.t})`);
+
+
+  // Render visualization
+  let render = async function () {
+    // Load datasets
+    let tempByState = await d3.csv('./GlobalLandTemperaturesByState_FILTERED.csv')
+    let us = await d3.json("./us-map.json")
+    console.log(tempByState)
+    console.log(us)
+
+    // Create US Map
+    let states = topojson.feature(us, us.objects.states);
+    let statesMesh = topojson.mesh(us, us.objects.states);
+    let projection = d3.geoAlbersUsa().fitSize([mainWidth, mainHeight], states);
+    let path = d3.geoPath().projection(projection);
+    
+    map.selectAll("path.state").data(states.features)
+                                .join("path")
+                                .attr("class", "state")
+                                .attr("d", path)
+                                .on('mouseover',  mouseEntersState )
+                                .on('mouseout',  mouseLeavesState );
+
+    map.append("path").datum(statesMesh)
+                      .attr("class", "outline")
+                      .attr("d", path);
+    
+    panel.append("line") 
+          .attr("x1", 0)
+          .attr("x2", 0)
+          .attr("y1", 0)
+          .attr("y2", mainHeight)
+          .attr("stroke", "#000")
+    // Max and Min average temperatures for Colorscale
+    let minHolder = 100;
+    tempByState.forEach(d => {
+      if (d.AverageTemperature < minHolder) {
+        minHolder = d.AverageTemperature
+      }
+    });
+    const minTemp = minHolder;
+    const maxHolder = -100;
+    tempByState.forEach(d => {
+      if (d.AverageTemperature > maxHolder) {
+        maxHolder = d.AverageTemperature
+      }
+    });
+    const maxTemp = maxHolder;
+    console.log(minTemp);
+    console.log(maxTemp);
+    const colorScale = d3.scaleQuantile()
+                          .domain([minTemp,maxTemp])
+                          .range([ "#5f9cfa" , " #a7c8fc "," #f4f8ff ", " #ff9696 ", " #fe5959 "]);
+
+    // Dates turned into datetime objects, dt column changed
+    const timeParser = d3.timeParse('%Y-%m-%d');
+    tempByState.forEach(d => {
+      d.dt = timeParser(d.dt);
+    });
+
+    // On hover interaction functions
+    function mouseEntersState() {
+      let state = d3.select(this);
+
+      state.attr("stroke","black")
+            .attr("stroke-width", 3);
+            
+      updatePanel(state);
+    }
+  
+    function mouseLeavesState() {  
+      let state = d3.select(this);
+
+      state.attr("stroke","none")
+          .attr("stroke-width", 0);
+
+      updatePanel( {} );
+    }
+
+    // Update information panel based on what state was selected
+    function updatePanel(state) {  
+
+    }
+  }
+  render();
+
+
+
+
+
+</script>
 
 </html>
