@@ -35,22 +35,47 @@
   <h2 style="text-align: center;">INFO 4310 Homework 2: Interactive Visualization Design</h2>
   <h4 style="text-align: center;">Eric Freitag, Longyi Zhang, Christopher Sun, Miles Rosenthal </h4>
   <div style="text-align: center;">
-    <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
+    <div class="flex-row">
+      <svg id="main" height=900 width=800 style="border:1px solid black;margin-bottom: 0;"></svg>
+      <svg id="panel" height=900 width=400></svg>
+    </div>
+    <input type ="number" id="inputField1" min="1913" max="2013">
+    <input type ="number" id="inputField2" min="1913" max="2013">
+    <input type ="number" id="inputField3" min="1913" max="2013">
+    <input type ="number" id="inputField4" min="1913" max="2013">
+    <button onclick ="submit()">Choose Years</button>
   </div>
 </body>
 
 <script>
+  //button submission function 
+  var input1 = 1913;
+  var input2 = 1913;
+  var input3 = 1913;
+  var input4 = 1913;
+  function submit() {
+    var x = document.getElementById("inputField1").value;
+    input1 = x;
+    x = document.getElementById("inputField2").value;
+    input2 = x;
+    x = document.getElementById("inputField3").value;
+    input3 = x;
+    x = document.getElementById("inputField4").value;
+    input4 = x;
+  }
 
-  // Set up main visualization and side panel
+  // Set up main visualization
   const main = d3.select("#main")
-  const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
+  const mainMargin = { t: 60, r: 20, b: 20, l: 20 }
   const mainWidth = main.attr("width") - mainMargin.l - mainMargin.r
   const mainHeight = main.attr("height") - mainMargin.t - mainMargin.b
   const map = main.append("g")
     .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`);
-  const panel = main.append("g")
-    .attr("transform", `translate(${mainMargin.l + mainWidth},${mainMargin.t})`);
 
+  // Set up side panel
+  const panel = d3.select("#panel")
+  const panelWidth = main.attr("width")
+  const panelHeight = main.attr("height") - mainMargin.t - mainMargin.b
 
   // Render visualization
   let render = async function () {
@@ -63,82 +88,73 @@
     console.log(tempByState)
     console.log(us)
 
-    // Create US Map
-    let states = topojson.feature(us, us.objects.states);
-    let statesMesh = topojson.mesh(us, us.objects.states);
-    let projection = d3.geoAlbersUsa().fitSize([mainWidth, mainHeight], states);
-    let path = d3.geoPath().projection(projection);
-
-    map.selectAll("path.state").data(states.features)
-      .join("path")
-      .attr("class", "state")
-      .attr("d", path)
-      .on('mouseover', mouseEntersState)
-      .on('mouseout', mouseLeavesState);
-
-    map.append("path").datum(statesMesh)
-      .attr("class", "outline")
-      .attr("d", path);
-
-    panel.append("line")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", mainHeight)
-      .attr("stroke", "#000")
-
-    // // Max and Min average temperatures for Colorscale
-    // let minHolder = 100;
-    // tempByState.forEach(d => {
-    //   if (d.AverageTemperature < minHolder) {
-    //     minHolder = d.AverageTemperature
-    //   }
-    // });
-    // const minTemp = minHolder;
-    // const maxHolder = -100;
-    // tempByState.forEach(d => {
-    //   if (d.AverageTemperature > maxHolder) {
-    //     maxHolder = d.AverageTemperature
-    //   }
-    // });
-    // const maxTemp = maxHolder;
-    // console.log(minTemp);
-    // console.log(maxTemp);
-    // const colorScale = d3.scaleQuantile()
-    //   .domain([minTemp, maxTemp])
-    //   .range(["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "]);
-
     // quantile scale for avg tmp
     let tempScale = d3.scaleQuantile(
       d3.extent(tempByState, d => Number(d.AverageTemperature)),
-      ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
-
+      ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "]);
 
     // Dates turned into datetime objects, dt column changed
     const timeParser = d3.timeParse('%Y-%m-%d');
     tempByState.forEach(d => {
       d.dt = timeParser(d.dt);
     });
-    console.log(tempByState)
+    console.log(tempByState);
+
+    // Create US Map
+    let states = topojson.feature(us, us.objects.states);
+    let statesMesh = topojson.mesh(us, us.objects.states);
+    let projection = d3.geoAlbersUsa().fitSize([mainWidth, mainHeight], states);
+    let path = d3.geoPath().projection(projection);
+
+    let idToState = { 23 : "Maine", 33 : "New Hampshire", 50 : "Vermont",
+    25 : "Massachusetts", 44 : "Rhode Island", 9 : "Connecticut",
+    36 : "New York", 42 : "Pennsylvania", 34 : "New Jersey",
+    10 : "Delaware", 24 : "Maryland", 51 : "Virginia",
+    54 : "West Virginia", 37 : "North Carolina", 45 : "South Carolina",
+    13 : "Georgia", 12 : "Florida", 1 : "Alabama",
+    47 : "Tennessee", 21 : "Kentucky", 39 : "Ohio",
+    26 : "Michigan", 18 : "Indiana", 28 : "Mississippi",
+    22 : "Louisiana", 5 : "Arkansas", 29 : "Missouri",
+    17 : "Illinois", 55 : "Wisconsin", 19 : "Iowa",
+    38 : "North Dakota", 46 : "South Dakota", 31 : "Nebraska",
+    20 : "Kansas", 40 : "Oklahoma", 48 : "Texas",
+    35 : "New Mexico", 8 : "Colorado", 56 : "Wyoming",
+    30 : "Montana", 16 : "Idaho", 49 : "Utah",
+    4 : "Arizona", 32 : "Nevada", 41 : "Oregon",
+    53 : "Washington", 6 : "California", 2 : "Alaska",
+    15 : "Hawaii", 27: "Minnesota"}
+    console.log(idToState)
+
+    let stateObjects = map.selectAll("path.state").data(states.features)
+                .join("path")
+                .attr("class", "state")
+                .attr("d", path)
+                // FIXME: parameterize user-selected date in the colorscale
+                // .style("fill", d => tempScale(tempByState[d.State].AverageTemperature))
+      
+    map.append("path").datum(statesMesh)
+      .attr("class", "outline")
+      .attr("d", path);
 
     // On hover interaction functions
-    function mouseEntersState() {
-      let state = d3.select(this);
+    stateObjects.on("mouseover", function(event, d) {
+      console.log(idToState[d.id])
 
-      state.attr("stroke", "black")
+      d3.select(this)
+        .attr("stroke","black")
         .attr("stroke-width", 3);
+    
+      updatePanel(idToState[d.id]);
+    });
 
-      updatePanel(state);
-    }
-
-    function mouseLeavesState() {
-      let state = d3.select(this);
-
-      state.attr("stroke", "none")
+    stateObjects.on("mouseout", function(event, d) {
+      d3.select(this)
+        .attr("stroke", "none")
         .attr("stroke-width", 0);
-
+    
       updatePanel({});
-    }
+    });
+    
 
     // Update information panel based on what state was selected
     function updatePanel(state) {
