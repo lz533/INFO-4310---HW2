@@ -1,0 +1,179 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css?family=Aldrich|Arima+Madurai|Open Sans|Libre+Baskerville|Pirata+One|Poiret+One|Sancreek|Satisfy|Share+Tech+Mono|Smokum|Snowburst+One|Special+Elite"
+    rel="stylesheet">
+
+  <style>
+    .state {
+      fill: lightgrey;
+      cursor: pointer;
+    }
+
+    .outline {
+      fill: none;
+      stroke: black;
+      stroke-width: 1px
+    }
+
+    .gridlines line {
+      stroke: #bbb;
+    }
+
+    .gridlines .domain {
+      stroke: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 style="text-align: center;">INFO 4310 Homework 2: Interactive Visualization Design</h2>
+  <h4 style="text-align: center;">Eric Freitag, Longyi Zhang, Christopher Sun, Miles Rosenthal </h4>
+  <div style="text-align: center;">
+    <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
+  </div>
+  <input type="number" id="inputField1" min="1913" max="2013">
+  <input type="number" id="inputField2" min="1913" max="2013">
+  <input type="number" id="inputField3" min="1913" max="2013">
+  <input type="number" id="inputField4" min="1913" max="2013">
+  <button onclick="submit()">Choose Years</button>
+</body>
+
+<script>
+  var input1 = 1913;
+  var input2 = 1946;
+  var input3 = 1979;
+  var input4 = 2013;
+  console.log(input1)
+  function submit() {
+    var x = document.getElementById("inputField1").value;
+    input1 = x;
+    x = document.getElementById("inputField2").value;
+    input2 = x;
+    x = document.getElementById("inputField3").value;
+    input3 = x;
+    x = document.getElementById("inputField4").value;
+    input4 = x;
+  }
+  // Set up main visualization and side panel
+  const main = d3.select("#main")
+  const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
+  const mainWidth = main.attr("width") - mainMargin.l - mainMargin.r
+  const mainHeight = main.attr("height") - mainMargin.t - mainMargin.b
+  const map = main.append("g")
+    .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`);
+  const panel = main.append("g")
+    .attr("transform", `translate(${mainMargin.l + mainWidth},${mainMargin.t})`);
+
+
+  // Render visualization
+  let render = async function () {
+    // Load datasets
+    let tempByState = await d3.csv('./processed_state_1913_2013.csv')
+    tempByState = tempByState.filter(function (d) { return d.State })
+    // let tempByCity = await d3.csv('./processed_city_1913_2012.csv')
+
+    let us = await d3.json("./us-map.json")
+    console.log(tempByState)
+    console.log(us)
+
+    // Create US Map
+    let states = topojson.feature(us, us.objects.states);
+    let statesMesh = topojson.mesh(us, us.objects.states);
+
+    // quantile scale for avg tmp
+    let tempScale = d3.scaleQuantize(
+      d3.extent(tempByState, d => Number(d.AverageTemperature)),
+      ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
+
+    //Grid setup
+    const cellWidth = Math.floor(mainWidth / 2)
+    const cellHeight = Math.floor(mainHeight / 2);
+    const chartMargin = 20;
+    const chartWidth = cellWidth - (2 * chartMargin);
+    const chartHeight = cellHeight - (2 * chartMargin);
+    let projection = d3.geoAlbersUsa().fitSize([chartWidth, chartHeight], states);
+    let path = d3.geoPath().projection(projection);
+
+    function createCell(x, y) {
+      let cell = main.append("g").attr("class", "cell")
+        .attr("transform", `translate(${x + 20},${y + 20})`);
+      cell.selectAll("path.state").data(states.features)
+        .join("path")
+        .attr("class", "state")
+        .attr("d", path)
+        .style("fill", d => tempScale(d.id))
+        .on('mouseover', mouseEntersState)
+        .on('mouseout', mouseLeavesState);
+
+      cell.append("path").datum(statesMesh)
+        .attr("class", "outline")
+        .attr("d", path);
+
+      return cell;
+    }
+
+    let cells = []
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < 2; j++) {
+        let xPos = j * cellWidth;
+        let yPos = i * cellHeight;
+        let cell = createCell(xPos, yPos);
+        cells.push(cell.node());
+      }
+    }
+    //cells listed [[1, 2], [3, 4]] in cells array: [1, 2, 3, 4]
+    console.log(cells);
+
+    panel.append("line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", mainHeight)
+      .attr("stroke", "#000")
+
+
+    // Dates turned into datetime objects, dt column changed
+    const timeParser = d3.timeParse('%Y-%m-%d');
+    tempByState.forEach(d => {
+      d.dt = timeParser(d.dt);
+    });
+    console.log(tempByState)
+
+    // On hover interaction functions
+    function mouseEntersState() {
+      let state = d3.select(this);
+
+      state.attr("stroke", "black")
+        .attr("stroke-width", 3);
+
+      updatePanel(state);
+    }
+
+    function mouseLeavesState() {
+      let state = d3.select(this);
+
+      state.attr("stroke", "none")
+        .attr("stroke-width", 0);
+
+      updatePanel({});
+    }
+
+    // Update information panel based on what state was selected
+    function updatePanel(state) {
+
+    }
+  }
+  render();
+
+
+
+
+</script>
+
+</html>
