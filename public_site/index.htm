@@ -10,12 +10,12 @@
     rel="stylesheet">
 
   <style>
-    .state{
+    .state {
       fill: lightgrey;
       cursor: pointer;
     }
-    
-    .outline{
+
+    .outline {
       fill: none;
       stroke: black;
       stroke-width: 1px
@@ -49,13 +49,16 @@
   const map = main.append("g")
     .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`);
   const panel = main.append("g")
-    .attr("transform", `translate(${mainMargin.l+mainWidth},${mainMargin.t})`);
+    .attr("transform", `translate(${mainMargin.l + mainWidth},${mainMargin.t})`);
 
 
   // Render visualization
   let render = async function () {
     // Load datasets
-    let tempByState = await d3.csv('./GlobalLandTemperaturesByState_FILTERED.csv')
+    let tempByState = await d3.csv('./processed_state_1913_2013.csv')
+    tempByState = tempByState.filter(function (d) { return d.State })
+    // let tempByCity = await d3.csv('./processed_city_1913_2012.csv')
+
     let us = await d3.json("./us-map.json")
     console.log(tempByState)
     console.log(us)
@@ -65,72 +68,80 @@
     let statesMesh = topojson.mesh(us, us.objects.states);
     let projection = d3.geoAlbersUsa().fitSize([mainWidth, mainHeight], states);
     let path = d3.geoPath().projection(projection);
-    
+
     map.selectAll("path.state").data(states.features)
-                                .join("path")
-                                .attr("class", "state")
-                                .attr("d", path)
-                                .on('mouseover',  mouseEntersState )
-                                .on('mouseout',  mouseLeavesState );
+      .join("path")
+      .attr("class", "state")
+      .attr("d", path)
+      .on('mouseover', mouseEntersState)
+      .on('mouseout', mouseLeavesState);
 
     map.append("path").datum(statesMesh)
-                      .attr("class", "outline")
-                      .attr("d", path);
-    
-    panel.append("line") 
-          .attr("x1", 0)
-          .attr("x2", 0)
-          .attr("y1", 0)
-          .attr("y2", mainHeight)
-          .attr("stroke", "#000")
-    // Max and Min average temperatures for Colorscale
-    let minHolder = 100;
-    tempByState.forEach(d => {
-      if (d.AverageTemperature < minHolder) {
-        minHolder = d.AverageTemperature
-      }
-    });
-    const minTemp = minHolder;
-    const maxHolder = -100;
-    tempByState.forEach(d => {
-      if (d.AverageTemperature > maxHolder) {
-        maxHolder = d.AverageTemperature
-      }
-    });
-    const maxTemp = maxHolder;
-    console.log(minTemp);
-    console.log(maxTemp);
-    const colorScale = d3.scaleQuantile()
-                          .domain([minTemp,maxTemp])
-                          .range([ "#5f9cfa" , " #a7c8fc "," #f4f8ff ", " #ff9696 ", " #fe5959 "]);
+      .attr("class", "outline")
+      .attr("d", path);
+
+    panel.append("line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", mainHeight)
+      .attr("stroke", "#000")
+
+    // // Max and Min average temperatures for Colorscale
+    // let minHolder = 100;
+    // tempByState.forEach(d => {
+    //   if (d.AverageTemperature < minHolder) {
+    //     minHolder = d.AverageTemperature
+    //   }
+    // });
+    // const minTemp = minHolder;
+    // const maxHolder = -100;
+    // tempByState.forEach(d => {
+    //   if (d.AverageTemperature > maxHolder) {
+    //     maxHolder = d.AverageTemperature
+    //   }
+    // });
+    // const maxTemp = maxHolder;
+    // console.log(minTemp);
+    // console.log(maxTemp);
+    // const colorScale = d3.scaleQuantile()
+    //   .domain([minTemp, maxTemp])
+    //   .range(["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "]);
+
+    // quantile scale for avg tmp
+    let tempScale = d3.scaleQuantile(
+      d3.extent(tempByState, d => Number(d.AverageTemperature)),
+      ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
+
 
     // Dates turned into datetime objects, dt column changed
     const timeParser = d3.timeParse('%Y-%m-%d');
     tempByState.forEach(d => {
       d.dt = timeParser(d.dt);
     });
+    console.log(tempByState)
 
     // On hover interaction functions
     function mouseEntersState() {
       let state = d3.select(this);
 
-      state.attr("stroke","black")
-            .attr("stroke-width", 3);
-            
+      state.attr("stroke", "black")
+        .attr("stroke-width", 3);
+
       updatePanel(state);
     }
-  
-    function mouseLeavesState() {  
+
+    function mouseLeavesState() {
       let state = d3.select(this);
 
-      state.attr("stroke","none")
-          .attr("stroke-width", 0);
+      state.attr("stroke", "none")
+        .attr("stroke-width", 0);
 
-      updatePanel( {} );
+      updatePanel({});
     }
 
     // Update information panel based on what state was selected
-    function updatePanel(state) {  
+    function updatePanel(state) {
 
     }
   }

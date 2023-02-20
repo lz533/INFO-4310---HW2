@@ -1,7 +1,7 @@
 import csv
 
 date_set = []
-for i in range(100):
+for i in range(101):
     curr_year = str(1913 + i)
     date_set.append(curr_year + "-09-01")
 
@@ -37,7 +37,7 @@ with open('GlobalLandTemperaturesByCity.csv', 'r') as f:
             data.append(row)
 
 # name the output file
-with open('processed_city_1913_2013.csv', 'w') as f:
+with open('processed_city_1913_2012.csv', 'w') as f:
     writer = csv.DictWriter(f, fieldnames=header)
     writer.writeheader()
     writer.writerows(data)

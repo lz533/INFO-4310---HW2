@@ -1,7 +1,7 @@
 import csv
 
 date_set = []
-for i in range(100):
+for i in range(101):
     curr_year = str(1913 + i)
     date_set.append(curr_year + "-09-01")
 
@@ -27,10 +27,13 @@ with open('GlobalLandTemperaturesByState.csv', 'r') as f:
 
     header = reader.fieldnames
     for row in reader:
+        # make dataset compatible with .topojson file
         if passes_filter(row):
-
+            if row['State'] == 'Georgia (State)':
+                row['State'] == 'Georgia'
             data.append(row)
 
+print(data[0:5])
 # name the output file
 with open('processed_state_1913_2013.csv', 'w') as f:
     writer = csv.DictWriter(f, fieldnames=header)
