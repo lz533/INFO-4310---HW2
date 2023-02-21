@@ -108,11 +108,14 @@
     let tempExt = d3.extent(tempByState, d => Number(d.AverageTemperature))
 
     // Quantile scale for avg tmp
-    let tempScale = d3.scaleQuantize(tempExt, ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
+    // let tempScale = d3.scaleQuantize(tempExt, ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
 
     // an alternative linear alternative scale
-    let tempScaleContinuous = d3.scaleSequential(d3.interpolateViridis)
-      .domain([-1, 10]);
+    // let tempScale = d3.scaleSequential(d3.interpolateViridis).domain(tempExt)
+
+    let tempScale = d3.scaleDiverging()
+      .domain([tempExt[1], 12, tempExt[0]])
+      .interpolator(d3.interpolateRdBu)
 
     //Grid setup
     const cellWidth = Math.floor(mainWidth / 2)
@@ -132,7 +135,9 @@
         .join("path")
         .attr("class", "state")
         .attr("d", path)
-        .style("fill", d => tempScaleContinuous(all_differences[year][tempStateYear[year][statesCode.indexOf(d.id)][['State']]]));
+        // .style("fill", d => tempScaleContinuous(all_differences[year][tempStateYear[year][statesCode.indexOf(d.id)][['State']]]));
+
+        .style("fill", d => tempScale(tempStateYear[year][statesCode.indexOf(d.id)].AverageTemperature));
 
       cell.append("path").datum(statesMesh)
         .attr("class", "outline")
