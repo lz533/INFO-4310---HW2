@@ -53,16 +53,18 @@
   var input3 = 1979;
   var input4 = 2013;
   console.log(input1)
-  function submit() {
-    var x = document.getElementById("inputField1").value;
-    input1 = x;
-    x = document.getElementById("inputField2").value;
-    input2 = x;
-    x = document.getElementById("inputField3").value;
-    input3 = x;
-    x = document.getElementById("inputField4").value;
-    input4 = x;
-  }
+
+  // function submit() {
+  //   var x = document.getElementById("inputField1").value;
+  //   input1 = x;
+  //   x = document.getElementById("inputField2").value;
+  //   input2 = x;
+  //   x = document.getElementById("inputField3").value;
+  //   input3 = x;
+  //   x = document.getElementById("inputField4").value;
+  //   input4 = x;
+  // }
+
   // Set up main visualization and side panel
   const main = d3.select("#main")
   const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
@@ -94,10 +96,14 @@
       tempStateYear[i + 1913] = year
     }
 
+    // find differences between input year and base year
+    let input4_differences = {};
+    for(let i=0; i<51; i++){
+      x = tempStateYear[input4][i]["AverageTemperature"] - tempStateYear['1913'][i]["AverageTemperature"];
+      input4_differences[tempStateYear[input4][i]["State"]] = x;
+    }
+
     let us = await d3.json("./us-map.json")
-    console.log(tempByState)
-    console.log(tempStateYear)
-    console.log(us)
 
     // Create US Map
     let states = topojson.feature(us, us.objects.states);
@@ -160,7 +166,6 @@
     tempByState.forEach(d => {
       d.dt = timeParser(d.dt);
     });
-    console.log(tempByState)
 
     // On hover interaction functions
     function mouseEntersState() {
