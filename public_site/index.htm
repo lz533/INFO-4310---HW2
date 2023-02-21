@@ -112,7 +112,7 @@
 
     // an alternative linear alternative scale
     let tempScaleContinuous = d3.scaleSequential(d3.interpolateViridis)
-      .domain([-1,10]);
+      .domain([-1, 10]);
 
     //Grid setup
     const cellWidth = Math.floor(mainWidth / 2)
@@ -147,6 +147,16 @@
       input[1] = document.getElementById("inputField2").value;
       input[2] = document.getElementById("inputField3").value;
       input[3] = document.getElementById("inputField4").value;
+
+      // find differences between input year and base year
+      for (let j = 0; j < 4; j++) {
+        let input_differences = {};
+        for (let i = 0; i < 51; i++) {
+          x = tempStateYear[input[j]][i]["AverageTemperature"] - tempStateYear['1913'][i]["AverageTemperature"];
+          input_differences[tempStateYear[input[j]][i]["State"]] = x;
+        }
+        all_differences[input[j]] = input_differences;
+      };
 
       let cells = [];
       let allCellStates = [];
