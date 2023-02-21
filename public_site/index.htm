@@ -41,30 +41,16 @@
   <input type="number" id="inputField2" min="1913" max="2013" value="1946">
   <input type="number" id="inputField3" min="1913" max="2013" value="1979">
   <input type="number" id="inputField4" min="1913" max="2013" value="2013">
-  <button onclick="submit()">Choose Years</button>
+  <button id="submit-year">Choose Years</button>
 
 
 
 </body>
 
 <script>
-  var input1 = 1913;
-  var input2 = 1946;
-  var input3 = 1979;
-  var input4 = 2013;
-  var input = [1913, 1946, 1979, 2013]
 
-  function submit() {
-    var x = document.getElementById("inputField1").value;
-    input[1] = x;
-    x = document.getElementById("inputField2").value;
-    input[2] = x;
-    x = document.getElementById("inputField3").value;
-    input[3] = x;
-    x = document.getElementById("inputField4").value;
-    input[4] = x;
-  }
-  console.log(input)
+  let input = [1913, 1946, 1979, 2013]
+
   // Set up main visualization and side panel
   const main = d3.select("#main")
   const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
@@ -109,7 +95,7 @@
       statesSliced[i] = states.features[i]
       statesCode[i] = states.features[i].id
     }
-    console.log(statesCode)
+    // console.log(statesCode)
     let statesMesh = topojson.mesh(us, us.objects.states);
 
     let tempExt = d3.extent(tempByState, d => Number(d.AverageTemperature))
@@ -152,18 +138,8 @@
     }
 
     let cells = []
-    for (let i = 0; i < 2; i++) {
-      for (let j = 0; j < 2; j++) {
-        let xPos = j * cellWidth;
-        let yPos = i * cellHeight;
-        let year = input[i * 2 + j]
-        console.log(year)
-        let cell = createCell(xPos, yPos, year);
-        cells.push(cell.node());
-      }
-    }
+
     //cells listed [[1, 2], [3, 4]] in cells array: [1, 2, 3, 4]
-    console.log(cells);
 
     panel.append("line")
       .attr("x1", 0)
@@ -178,7 +154,6 @@
     tempByState.forEach(d => {
       d.dt = timeParser(d.dt);
     });
-    console.log(tempByState)
 
     // On hover interaction functions
     function mouseEntersState() {
@@ -203,6 +178,31 @@
     function updatePanel(state) {
 
     }
+
+    function updateMap() {
+      console.log('submitted')
+      input[0] = document.getElementById("inputField1").value
+      input[1] = document.getElementById("inputField2").value
+      input[2] = document.getElementById("inputField3").value;
+      input[3] = document.getElementById("inputField4").value
+      console.log(input)
+
+      for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 2; j++) {
+          let xPos = j * cellWidth;
+          let yPos = i * cellHeight;
+          let year = input[i * 2 + j]
+          let cell = createCell(xPos, yPos, year);
+          cells.push(cell.node());
+        }
+      }
+    }
+    // listens to button submit
+    let btn = d3.select('button#submit-year')
+      .on("click", d => updateMap());
+
+    // draw map upon loading.
+    updateMap()
   }
   render();
 
