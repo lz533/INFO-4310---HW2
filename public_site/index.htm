@@ -83,11 +83,15 @@
     }
 
     // find differences between input year and base year
-    let input4_differences = {};
-    for(let i=0; i<51; i++){
-      x = tempStateYear[input4][i]["AverageTemperature"] - tempStateYear['1913'][i]["AverageTemperature"];
-      input4_differences[tempStateYear[input4][i]["State"]] = x;
-    }
+    let all_differences = {};
+    for (let j = 0; j < 4; j++) {
+      let input_differences = {};
+      for (let i = 0; i < 51; i++) {
+        x = tempStateYear[input[j]][i]["AverageTemperature"] - tempStateYear['1913'][i]["AverageTemperature"];
+        input_differences[tempStateYear[input[j]][i]["State"]] = x;
+      }
+      all_differences[input[j]] = input_differences;
+    };
 
     let us = await d3.json("./us-map.json")
 
@@ -99,10 +103,10 @@
       statesSliced[i] = states.features[i]
       statesCode[i] = states.features[i].id
     }
-    // console.log(statesCode)
     let statesMesh = topojson.mesh(us, us.objects.states);
 
     let tempExt = d3.extent(tempByState, d => Number(d.AverageTemperature))
+
     // quantile scale for avg tmp
     let tempScale = d3.scaleQuantize(
       tempExt,
@@ -110,8 +114,7 @@
 
     // an alternative linear alternative scale
     let tempScaleContinuous = d3.scaleSequential(d3.interpolateViridis)
-      .domain(tempExt)
-
+      .domain([-1,10]);
 
     //Grid setup
     const cellWidth = Math.floor(mainWidth / 2)
@@ -130,7 +133,7 @@
         .join("path")
         .attr("class", "state")
         .attr("d", path)
-        .style("fill", d => tempScaleContinuous(yearData[statesCode.indexOf(d.id)].AverageTemperature))
+        .style("fill", d => tempScaleContinuous(all_differences[year][tempStateYear[year][statesCode.indexOf(d.id)][['State']]]))
         .on('mouseover', mouseEntersState)
         .on('mouseout', mouseLeavesState);
 
