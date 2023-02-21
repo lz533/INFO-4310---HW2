@@ -37,10 +37,10 @@
   <div style="text-align: center;">
     <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
   </div>
-  <input type="number" id="inputField1" min="1913" max="2013">
-  <input type="number" id="inputField2" min="1913" max="2013">
-  <input type="number" id="inputField3" min="1913" max="2013">
-  <input type="number" id="inputField4" min="1913" max="2013">
+  <input type="number" id="inputField1" min="1913" max="2013" value="1913">
+  <input type="number" id="inputField2" min="1913" max="2013" value="1946">
+  <input type="number" id="inputField3" min="1913" max="2013" value="1979">
+  <input type="number" id="inputField4" min="1913" max="2013" value="2013">
   <button onclick="submit()">Choose Years</button>
 
 
@@ -52,17 +52,19 @@
   var input2 = 1946;
   var input3 = 1979;
   var input4 = 2013;
-  console.log(input1)
+  var input = [1913, 1946, 1979, 2013]
+
   function submit() {
     var x = document.getElementById("inputField1").value;
-    input1 = x;
+    input[1] = x;
     x = document.getElementById("inputField2").value;
-    input2 = x;
+    input[2] = x;
     x = document.getElementById("inputField3").value;
-    input3 = x;
+    input[3] = x;
     x = document.getElementById("inputField4").value;
-    input4 = x;
+    input[4] = x;
   }
+  console.log(input)
   // Set up main visualization and side panel
   const main = d3.select("#main")
   const mainMargin = { t: 60, r: 400, b: 20, l: 20 }
@@ -97,16 +99,29 @@
     let us = await d3.json("./us-map.json")
     console.log(tempByState)
     console.log(tempStateYear)
-    console.log(us)
+
 
     // Create US Map
     let states = topojson.feature(us, us.objects.states);
+    let statesSliced = []
+    let statesCode = [] // array of state codes. Codes share the same position as their corresponding states in the TempStateYear object
+    for (let i = 0; i < 51; i++) {
+      statesSliced[i] = states.features[i]
+      statesCode[i] = states.features[i].id
+    }
+    console.log(statesCode)
     let statesMesh = topojson.mesh(us, us.objects.states);
 
+    let tempExt = d3.extent(tempByState, d => Number(d.AverageTemperature))
     // quantile scale for avg tmp
     let tempScale = d3.scaleQuantize(
-      d3.extent(tempByState, d => Number(d.AverageTemperature)),
+      tempExt,
       ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
+
+    // an alternative linear alternative scale
+    let tempScaleContinuous = d3.scaleSequential(d3.interpolateViridis)
+      .domain(tempExt)
+
 
     //Grid setup
     const cellWidth = Math.floor(mainWidth / 2)
@@ -117,14 +132,15 @@
     let projection = d3.geoAlbersUsa().fitSize([chartWidth, chartHeight], states);
     let path = d3.geoPath().projection(projection);
 
-    function createCell(x, y) {
+    function createCell(x, y, year) {
+      let yearData = tempStateYear[year]
       let cell = main.append("g").attr("class", "cell")
         .attr("transform", `translate(${x + 20},${y + 20})`);
-      cell.selectAll("path.state").data(states.features)
+      cell.selectAll("path.state").data(statesSliced)
         .join("path")
         .attr("class", "state")
         .attr("d", path)
-        .style("fill", d => tempScale(d.id))
+        .style("fill", d => tempScaleContinuous(yearData[statesCode.indexOf(d.id)].AverageTemperature))
         .on('mouseover', mouseEntersState)
         .on('mouseout', mouseLeavesState);
 
@@ -140,7 +156,9 @@
       for (let j = 0; j < 2; j++) {
         let xPos = j * cellWidth;
         let yPos = i * cellHeight;
-        let cell = createCell(xPos, yPos);
+        let year = input[i * 2 + j]
+        console.log(year)
+        let cell = createCell(xPos, yPos, year);
         cells.push(cell.node());
       }
     }

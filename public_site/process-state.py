@@ -33,7 +33,7 @@ with open('GlobalLandTemperaturesByState.csv', 'r') as f:
                 row['State'] == 'Georgia'
             data.append(row)
 
-print(data[0:5])
+# print(data[0:5])
 # name the output file
 with open('processed_state_1913_2013.csv', 'w') as f:
     writer = csv.DictWriter(f, fieldnames=header)
