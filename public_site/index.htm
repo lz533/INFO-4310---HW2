@@ -29,12 +29,27 @@
       stroke: none;
     }
 
+    body {
+      font: "Arima+Madurai";
+    }
+
     label {
       font-size: 12pt;
     }
 
     p {
       font-size: 13pt;
+    }
+
+    .panel-title {
+      font-size: 16pt;
+      text-anchor: middle;
+      font-weight: bold;
+    }
+
+    .panel-table {
+      font-size: 14pt;
+      text-anchor: middle;
     }
   </style>
 </head>
@@ -53,7 +68,7 @@
       which will then display a scatterplot of the average temperatures
       over time on a panel next to the main visual.
     </p>
-    <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
+    <svg id="main" height=750 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
   </div>
   <input type="number" id="inputField1" min="1913" max="2013" value="1913">
   <input type="number" id="inputField2" min="1913" max="2013" value="1946">
@@ -75,6 +90,8 @@
     .attr("transform", `translate(${mainMargin.l},${mainMargin.t})`);
   const panel = main.append("g")
     .attr("transform", `translate(${mainMargin.l + mainWidth},${mainMargin.t})`);
+  const panelWidth = mainMargin.r;
+  const panelHeight = mainHeight;
 
 
   // Render visualization
@@ -129,14 +146,14 @@
     // Quantile scale for avg tmp
     // let tempScale = d3.scaleQuantize(tempExt, ["#5f9cfa", " #a7c8fc ", " #f4f8ff ", " #ff9696 ", " #fe5959 "])
 
-    // an alternative linear alternative scale
+    // An alternative linear alternative scale
     // let tempScale = d3.scaleSequential(d3.interpolateViridis).domain(tempExt)
 
     let tempScale = d3.scaleDiverging([-5, 0, 5], ['#0000AA', '#fff', '#7F0000'])
     // .domain([5, 0, -5])
     // .interpolator(d3.interpolate("blue", "red"))
 
-    //Grid setup
+    // Grid setup
     const cellWidth = Math.floor(mainWidth / 2)
     const cellHeight = Math.floor(mainHeight / 2);
     const chartMargin = 20;
@@ -158,6 +175,7 @@
 
       // .style("fill", d => tempScale(tempStateYear[year][statesCode.indexOf(d.id)].AverageTemperature));
 
+
       cell.append("path").datum(statesMesh)
         .attr("class", "outline")
         .attr("d", path);
@@ -172,7 +190,7 @@
       input[2] = document.getElementById("inputField3").value;
       input[3] = document.getElementById("inputField4").value;
 
-      // find differences between input year and base year
+      // Find differences between input year and base year
       for (let j = 0; j < 4; j++) {
         let input_differences = {};
         for (let i = 0; i < 51; i++) {
@@ -212,7 +230,7 @@
               .attr("stroke-width", 3);
           })
 
-          updatePanel(idToState[d.id]);
+          updatePanel(d.id);
         })
 
         s1.on("mouseout", function (event, d) {
@@ -222,9 +240,7 @@
               .attr("stroke-width", 0);
           })
 
-
-
-          updatePanel({});
+          updatePanel(-1);
         });
       })
     }
@@ -242,6 +258,7 @@
       .attr("y1", 0)
       .attr("y2", mainHeight)
       .attr("stroke", "#000")
+
 
     let idToState = {
       23: "Maine", 33: "New Hampshire", 50: "Vermont",
@@ -264,7 +281,152 @@
     }
 
     // Update information panel based on what state was selected
-    function updatePanel(state) { }
+    function updatePanel(id) {
+      if (id == -1) {
+        panel.selectAll("*").remove();
+        panel.append("line")
+          .attr("x1", 0)
+          .attr("x2", 0)
+          .attr("y1", 0)
+          .attr("y2", mainHeight)
+          .attr("stroke", "#000");
+      }
+      else {
+        const yearToTemp = [];
+        for (let j = 0; j < 4; j++) {
+          yearToTemp[j] = [input[j], tempStateYear[input[j]][statesCode.indexOf(id)]["AverageTemperature"]]
+        };
+
+        const panelInformation = panel.append("g")
+          .attr("transform", `translate(${panelWidth / 2},${0})`);
+
+        panelInformation.append("text")
+          .attr("class", "panel-title")
+          .text(idToState[id]);
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -160)
+          .attr("y", 50)
+          .attr("font-weight", "bold")
+          .text("Year");
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -160)
+          .attr("y", 100)
+          .text(yearToTemp[0][0]);
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -160)
+          .attr("y", 150)
+          .text(yearToTemp[1][0]);
+        let panelTable3Year = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -160)
+          .attr("y", 200)
+          .text(yearToTemp[2][0]);
+        let panelTable4Year = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -160)
+          .attr("y", 250)
+          .text(yearToTemp[3][0]);
+        let panelTableHeaderTemp = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -50)
+          .attr("y", 50)
+          .attr("font-weight", "bold")
+          .text("Average Temp (C)");
+        let panelTable1Temp = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -50)
+          .attr("y", 100)
+          .text(yearToTemp[0][1]);
+        let panelTable2Temp = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -50)
+          .attr("y", 150)
+          .text(yearToTemp[1][1]);
+        let panelTable3Temp = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -50)
+          .attr("y", 200)
+          .text(yearToTemp[2][1]);
+        let panelTable4Temp = panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", -50)
+          .attr("y", 250)
+          .text(yearToTemp[3][1]);
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", 115)
+          .attr("y", 50)
+          .attr("font-weight", "bold")
+          .text("Change in Temp (C)");
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", 115)
+          .attr("y", 100)
+          .text((yearToTemp[0][1] - yearToTemp[0][1]).toFixed(1));
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", 115)
+          .attr("y", 150)
+          .text((yearToTemp[1][1] - yearToTemp[0][1]).toFixed(1));
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", 115)
+          .attr("y", 200)
+          .text((yearToTemp[2][1] - yearToTemp[0][1]).toFixed(1));
+        panelInformation.append("text")
+          .attr("class", "panel-table")
+          .attr("x", 115)
+          .attr("y", 250)
+          .text((yearToTemp[3][1] - yearToTemp[0][1]).toFixed(1));
+
+        let panelChart = panel.append("g")
+          .attr("class", "panel-chart")
+          .attr("transform", `translate(${50},${300})`);
+
+        const tExtent = d3.extent(yearToTemp, d => d[1])
+        const tScale = d3.scaleLinear().domain(tExtent).range([300, 0])
+
+        const yExtent = d3.extent(yearToTemp, d => d[0])
+        const yScale = d3.scaleLinear().domain(yExtent).range([0, 300])
+
+        let leftAxis = d3.axisLeft(tScale)
+        let leftGridlines = d3.axisLeft(tScale)
+          .tickFormat("")
+          .tickSize(-310);
+
+        panelChart.append("g").attr("class", "y axis")
+          .attr("transform", `translate(${-10},${0})`)
+          .call(leftAxis);
+
+        panelChart.append("g").attr("class", "y gridlines")
+          .attr("transform", `translate(${-10},${0})`)
+          .call(leftGridlines);
+
+        let bottomAxis = d3.axisBottom(yScale).tickFormat(d3.format("~f"))
+        let bottomGridlines = d3.axisBottom(yScale)
+          .tickFormat("")
+          .tickSize(-310);
+
+        panelChart.append("g").attr("class", "x axis")
+          .attr("transform", `translate(${0},${310})`)
+          .call(bottomAxis);
+
+        panelChart.append("g").attr("class", "x gridlines")
+          .attr("transform", `translate(${0},${310})`)
+          .call(bottomGridlines);
+
+        panelChart.selectAll("circle")
+          .data(yearToTemp)
+          .join("circle")
+          .attr("cx", d => yScale(d[0]))
+          .attr("cy", d => tScale(d[1]))
+          .attr("r", 3)
+          .attr("fill", "red");
+      }
+    }
   }
   render();
 
