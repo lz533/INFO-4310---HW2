@@ -28,6 +28,14 @@
     .gridlines .domain {
       stroke: none;
     }
+
+    label {
+      font-size: 12pt;
+    }
+
+    p {
+      font-size: 13pt;
+    }
   </style>
 </head>
 
@@ -35,6 +43,16 @@
   <h2 style="text-align: center;">INFO 4310 Homework 2: Interactive Visualization Design</h2>
   <h4 style="text-align: center;">Eric Freitag, Longyi Zhang, Christopher Sun, Miles Rosenthal </h4>
   <div style="text-align: center;">
+    <p>
+      This visualization displays maps of the United States with each
+      state being colored, on a diverging scale, according to their average
+      temperature for the map's specific year. The scale goes from blue, the coldest,
+      to red, the hottest, with white as a middle ground. Users can input
+      specific years for each map to see different progressions of the average
+      temperature throughout those years. Users can also hover over specific states,
+      which will then display a scatterplot of the average temperatures
+      over time on a panel next to the main visual.
+    </p>
     <svg id="main" height=900 width=1200 style="border:1px solid black;margin-bottom: 0;"></svg>
   </div>
   <input type="number" id="inputField1" min="1913" max="2013" value="1913">
@@ -42,6 +60,7 @@
   <input type="number" id="inputField3" min="1913" max="2013" value="1979">
   <input type="number" id="inputField4" min="1913" max="2013" value="2013">
   <button id="submit-year">Choose Years</button>
+  <label for="submit-year">(Enter years from 1913 to 2013)</label>
 </body>
 
 <script>
@@ -166,12 +185,19 @@
       let cells = [];
       let allCellStates = [];
 
+      document.getElementById("submit-year").onclick = function () {
+        main.selectAll('text').remove();
+      }
       for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
           let xPos = j * cellWidth;
           let yPos = i * cellHeight;
           let year = input[i * 2 + j]
           let [cell, cellStates] = createCell(xPos, yPos, year);
+          main.append("text")
+            .attr("x", xPos + 155)
+            .attr("y", yPos + 360)
+            .text(year);
           cells.push(cell.node());
           allCellStates.push(cellStates);
         }
@@ -196,6 +222,8 @@
               .attr("stroke-width", 0);
           })
 
+
+
           updatePanel({});
         });
       })
@@ -206,7 +234,7 @@
 
     // Listens to button submit
     let btn = d3.select('button#submit-year')
-      .on("click", d => updateMap());
+      .on("click", d => updateMap())
 
     panel.append("line")
       .attr("x1", 0)
